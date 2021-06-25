@@ -1,0 +1,18 @@
+.slider-wrapper {
+  margin-top: 40px;
+  cursor: pointer;
+
+  @include mobileMax {
+    margin-top: 0;
+  }
+}
+
+.slide-wrapper {
+  width: 100vw;
+  height: auto;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+}

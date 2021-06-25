@@ -1,0 +1,46 @@
+// Full colors
+$colorBlack: #000;
+$colorBlue: #4169e1;
+$colorCyan: #00ffff;
+$colorGray: gray;
+$colorGreen: #037d50;
+$colorPink: #FF69B4;
+$colorOrange: #FF4500;
+$colorPurple: #663399;
+$colorRed: #B22222;
+$colorWhite: #EEE;
+$colorYellow: #FFD700;
+$color_give_name: #2F4F4F;
+
+// BrightColors
+$colorBrightBlue: #1E90FF;
+
+// Light colors
+$colorLightBlue: #AFEEEE;
+$colorLightGreen: #9ACD32;
+$colorLightOrange: #F4A460;
+$colorLightYellow: #F0E68C;
+
+// Dark colors
+$colorDarkBlue: #1e222b;
+$colorDarkWhite: #DDD;
+
+// Consts
+$fullOpacity: 0.2;
+$halfOpacity: 0.5;
+$lightOpacity: 0.8;
+
+// Default light mode
+$colorButton: $colorBlue;
+$colorButtonHover: $colorGreen;
+$colorFailure: $colorRed;
+$colorMoreAction: $color_give_name;
+$colorProcessing: $colorBrightBlue;
+$colorSuccess: $colorGreen;
+$colorWarning: $colorOrange;
+
+// Theme colors
+$colorThemeDark: $colorDarkBlue;
+$colorThemeDarkDarker: $colorBlack;
+$colorThemeLight: $colorWhite;
+$colorThemeLightDarker: $colorDarkWhite;

@@ -1,0 +1,21 @@
+@font-face {
+  font-family: "PoppinsLight";
+  src: url("../fonts/poppins-light.ttf");
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("../fonts/poppins-regular.ttf");
+}
+
+@font-face {
+  font-family: "Pompiere";
+  src: url("../fonts/Pompiere.otf");
+}
+
+@mixin fontPompiere {
+  font-family: Pompiere;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 300;
+}

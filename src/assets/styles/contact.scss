@@ -1,0 +1,30 @@
+.contact-common-form {
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+  flex-direction: column;
+}
+
+.contact-message {
+  resize: vertical;
+  min-height: 300px;
+}
+
+.submit-button {
+  margin: 10px 0 0 auto;
+  border: 0;
+  cursor: pointer;
+  padding: 5px 10px;
+  font-size: 16px;
+  border-radius: 5px;
+
+  @include themify {
+    background-color: themed($colorMainContrast);
+    color: themed($colorMain);
+
+    &:hover {
+      background-color: themed($colorMain);
+      color: themed($colorMainContrast);
+    }
+  }
+}

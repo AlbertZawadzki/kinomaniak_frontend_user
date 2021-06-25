@@ -1,0 +1,32 @@
+.poster-wrapper {
+  height: 254px;
+  width: 178px;
+  margin: 10px 10px 10px 0;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  @include themify {
+    box-shadow: inset 0 0 3px 1px themed($colorMain);
+
+    &:hover {
+      box-shadow: inset 0 0 50px 1px themed($colorMain);
+    }
+  }
+}
+
+.poster-pin {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: rotate(10deg);
+  padding: 3px 8px;
+  border-radius: 5px;
+  opacity: 0.5;
+
+  .poster-wrapper:hover & {
+    opacity: 1;
+  }
+}

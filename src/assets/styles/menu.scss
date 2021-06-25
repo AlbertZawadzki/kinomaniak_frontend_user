@@ -1,0 +1,144 @@
+nav {
+  width: clamp(100px, 100%, 1200px);
+  height: 40px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  padding: 0 calc(50vw - 600px);
+  justify-content: flex-end;
+  z-index: 100;
+
+  @include themify {
+    background: themed($colorMain);
+  }
+
+  @include mobileMax {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
+    padding: 80px 0 0;
+    transition: left 0.25s ease-in-out;
+
+    &.hide {
+      left: -200vw;
+    }
+  }
+}
+
+.menu-item-wrapper {
+  position: relative;
+  padding: 8px 10px;
+
+  &:hover {
+    cursor: pointer;
+
+    @include themify {
+      color: themed($colorMain);
+      background: themed($colorMainContrast);
+    }
+
+    & > .menu-item-sub-wrapper {
+      display: block;
+    }
+  }
+}
+
+.menu-item {
+}
+
+.menu-item-sub-wrapper {
+  display: none;
+  top: 100%;
+  width: 100%;
+  text-align: center;
+
+  a {
+    @include themify {
+      color: themed($colorMainContrast);
+    }
+  }
+
+  @include mobileMax {
+    display: block;
+
+    @include themify {
+      background: rgba(themed($colorMainContrast), 0.5);
+
+      a {
+        color: themed($colorMain);
+      }
+    }
+  }
+}
+
+.menu-item-sub {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+
+  @include themify {
+    background: rgba(themed($colorMainContrast), 0.5);
+
+    &:hover {
+      background: rgba(themed($colorMain), 1);
+      color: rgba(themed($colorMainContrast), 1);
+    }
+  }
+
+  @include mobileMax {
+    position: relative;
+  }
+}
+
+.menu-lines-wrapper {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  height: 20px;
+  padding: 5px;
+  width: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  @include themify {
+    background: rgba(themed($colorMain), 0.5);
+    border-radius: 5px;
+  }
+}
+
+.menu-line-0 {
+  width: 80%;
+  margin: auto;
+
+  @include themify {
+    border: 1px solid themed($colorMainContrast);
+  }
+}
+
+.menu-line-1 {
+  @extend .menu-line-0;
+
+  .show & {
+    transform: rotate(45deg) scale(1.21) translate(4px, 4px);
+  }
+}
+
+.menu-line-2 {
+  @extend .menu-line-0;
+
+  .show & {
+    transform: scale(0);
+  }
+}
+
+.menu-line-3 {
+  @extend .menu-line-0;
+
+  .show & {
+    transform: rotate(-45deg) scale(1.21) translate(4px, -4px);
+  }
+}
