@@ -19,7 +19,7 @@ class Slider extends React.Component {
         <SliderSlick {...this.settings}>
           {
             slides?.desktop?.map((slide, slideNo) => (
-                <Link href={`/content/${slide.url}`}>
+                <Link href={`/content/${slide.id}/${slide.url}`}>
                   <div className='slide-wrapper' key={`${slide.key}-${slideNo}`}>
                     <img src={slide.image_url} />
                   </div>

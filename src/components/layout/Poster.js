@@ -6,7 +6,7 @@ class Poster extends React.Component {
     const {
       poster,
       contentUrl,
-      geo_blocked,
+      geo_blocked
     } = this.props
 
     const {

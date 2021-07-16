@@ -16,16 +16,16 @@ class Section extends React.Component {
     const { name, contents, key } = this.props
 
     return (
-      <div className='section-wrapper'>
+      <div className="section-wrapper">
         <h3>
           {name}
         </h3>
-        <div className='posters-wrapper'>
+        <div className="posters-wrapper">
           <SliderSlick {...this.settings}>
             {
               contents?.map((content, posterNo) => (
                   <Link href={`/content/${content.url}`} key={`${key}-${content.key}-${posterNo}`}>
-                    <Poster {...content} contentUrl={`/content/${content.url}`} />
+                    <Poster {...content} contentUrl={`/content/${content.id}/${content.url}`} />
                   </Link>
                 ),
               )

@@ -24,7 +24,7 @@ class Home extends React.Component {
     const { sections } = this.state
 
     return (
-      <Layout>
+      <Layout title={'home'}>
         {sections?.map(section => <Section {...section} />)}
       </Layout>
     )

@@ -8,6 +8,7 @@ import { setPages } from "../../redux/actions/page"
 import { setSeos } from "../../redux/actions/seo"
 import store from "../../redux/store"
 import Slider from "./Slider"
+import Head from "next/head"
 
 class Layout extends React.Component {
   state = {
@@ -17,19 +18,18 @@ class Layout extends React.Component {
   }
 
   async componentDidMount() {
-    const data = await database.get("data")
+    const data = await database.get("home")
 
     store.dispatch(setSections(data.sections))
     store.dispatch(setPages(data.pages))
     store.dispatch(setSeos(data.seo))
-    console.log({ data })
 
     this.setState({ fetched: true, seo: data.seo, slides: data.slider })
   }
 
   render() {
     const { fetched, slides, seo } = this.state
-    const { children } = this.props
+    const { children, title } = this.props
 
     const fitSeo = seo.filter(item => item.url.toString().toLowerCase() === window.location.pathname.toString().toLowerCase())
 
@@ -43,6 +43,9 @@ class Layout extends React.Component {
 
     return (
       <React.Fragment>
+        <Head>
+          <title>VOD | {title || ""}</title>
+        </Head>
         <DesktopMenu />
         <MobileMenu />
         <Slider slides={slides} />

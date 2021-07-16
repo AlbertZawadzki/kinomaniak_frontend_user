@@ -80,14 +80,16 @@ class Configuration {
    * All session params
    */
   getParams = () => {
-    return {
-      _token: localStorage.getItem(this.TOKEN) || "no_token",
-      _latitude: "no_latitude",
-      _longitude: "no_langitude",
-      _csrf_name: store.getState().request?.data?._csrf_name || "no_csrf_name",
-      _csrf_token: localStorage.getItem(this.TOKEN) || "no_csrf_token",
-      // FIXME: should be handled by notifications
-      _force: true,
+    if (typeof window !== "undefined") {
+      return {
+        _token: localStorage?.getItem(this.TOKEN) || "no_token",
+        _latitude: "no_latitude",
+        _longitude: "no_langitude",
+        _csrf_name: store.getState().request?.data?._csrf_name || "no_csrf_name",
+        _csrf_token: localStorage?.getItem(this.TOKEN) || "no_csrf_token",
+        // FIXME: should be handled by notifications
+        _force: true,
+      }
     }
   }
 

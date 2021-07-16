@@ -9,7 +9,12 @@
 
 .slide-wrapper {
   width: 100vw;
-  height: auto;
+  height: 37.5vw;
+
+  @include mobileMax {
+    width: 100vw;
+    height: 56.25vw;
+  }
 
   img {
     width: 100%;
