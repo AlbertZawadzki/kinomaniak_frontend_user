@@ -9,6 +9,7 @@ import { setSeos } from "../../redux/actions/seo"
 import store from "../../redux/store"
 import Slider from "./Slider"
 import Head from "next/head"
+import Loader from "../Loader"
 
 class Layout extends React.Component {
   state = {
@@ -35,9 +36,7 @@ class Layout extends React.Component {
 
     if (!fetched) {
       return (
-        <div>
-          Loader
-        </div>
+        <Loader />
       )
     }
 

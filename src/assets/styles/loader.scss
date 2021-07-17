@@ -1,0 +1,38 @@
+.loader-wrapper {
+  width: 100vw;
+  height: 100vh;
+  min-height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.loader-bar {
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+
+  &.outer {
+    width: 180px;
+    height: 180px;
+    border: 15px solid transparent;
+    border-top: 15px solid $colorRed;
+    animation: loaderOuterRing 3s infinite linear;
+  }
+
+  &.inner {
+    width: 100px;
+    height: 100px;
+    border: 10px solid transparent;
+    border-top: 10px solid $colorBlue;
+    animation: loaderInnerRing 1.5s infinite linear;
+  }
+}
+
+.loader-time {
+  position: absolute;
+  font-size: 30px;
+}
