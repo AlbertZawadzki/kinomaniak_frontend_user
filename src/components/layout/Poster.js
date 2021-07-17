@@ -6,7 +6,8 @@ class Poster extends React.Component {
     const {
       poster,
       contentUrl,
-      geo_blocked
+      geo_blocked,
+      title,
     } = this.props
 
     const {
@@ -19,7 +20,6 @@ class Poster extends React.Component {
     } = poster
 
     const stylesWrapper = {
-      backgroundImage: `url(${image.web})`,
       borderColor: border_color,
       borderWidth: border_visible ? 1 : 0,
       opacity: geo_blocked ? 0.2 : 1,
@@ -32,6 +32,9 @@ class Poster extends React.Component {
     return (
       <Link href={contentUrl}>
         <div className="poster-wrapper" style={stylesWrapper}>
+          <div className="poster-image-wrapper">
+            <img className="poster-image" src={image.web} alt={title} />
+          </div>
           <div className="poster-pin" style={stylesTag}>
             {pin_text}
           </div>
