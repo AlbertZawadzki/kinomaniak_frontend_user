@@ -1,7 +1,7 @@
 import React from "react"
 
 const ContentSection = ({ children, title }) => (
-  <section>
+  <section className='content-section-wrapper'>
     <h2>
       {title}
     </h2>

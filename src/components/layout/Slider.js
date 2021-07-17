@@ -15,12 +15,12 @@ class Slider extends React.Component {
     const { slides } = this.props
 
     return (
-      <div className='slider-wrapper'>
+      <div className="slider-wrapper">
         <SliderSlick {...this.settings}>
           {
             slides?.desktop?.map((slide, slideNo) => (
-                <Link href={`/content/${slide.id}/${slide.url}`}>
-                  <div className='slide-wrapper' key={`${slide.key}-${slideNo}`}>
+                <Link href={`/content/${slide.id}/${slide.url}`} key={`slider-${slide.key}-${slideNo}`}>
+                  <div className="slide-wrapper" key={`${slide.key}-${slideNo}`}>
                     <img src={slide.image_url} />
                   </div>
                 </Link>

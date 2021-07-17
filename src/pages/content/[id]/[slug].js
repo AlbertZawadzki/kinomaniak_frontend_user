@@ -5,39 +5,33 @@ import database from "../../../database"
 import Layout from "../../../components/layout/Layout"
 import Poster from "../../../components/layout/Poster"
 import ContentSection from "../../../components/pages/ContentSection"
+import ContentInfo from "../../../components/pages/ContentInfo"
 
 const Content = ({ content }) => {
+  let show = 0
+  if (content.geo_blocked) {
+    show = 1
+  } else if (!content.available && !content.pre_premiere_availability) {
+    show = 2
+  }
+
+
   return (
     <Layout title={content.title}>
       <h1 className="content-title">{content.title}</h1>
-      <main>
-        <ContentSection title="Opis">
-          {content.description}
-        </ContentSection>
-        <ContentSection title="Informacje">
-          <div className="content-info-key">
-            Data wydania
-          </div>
-          <div className="content-info-data">
-            {content.release_date}
-          </div>
-          <div className="content-info-key">
-            Dostępne wkrótce
-          </div>
-          <div className="content-info-data">
-            {content.available_soon} {content.premiere_date}
-          </div>
-          <div className="content-info-key">
-            Pokazuj przed premierą
-          </div>
-          <div className="content-info-data">
-            {content.pre_premiere_availability}
-          </div>
-        </ContentSection>
-        <ContentSection title="Dostępne w regionach">
-          {content.regions.map(region => `${region.name} (${region.region}),`)}
-        </ContentSection>
-      </main>
+      {show !== 0 ? null : (
+        <ContentInfo content={content} />
+      )}
+      {show !== 1 ? null : (
+        <main>
+          Ta zawartość jest niedostępna w twoim regionie
+        </main>
+      )}
+      {show !== 2 ? null : (
+        <main>
+          Ta zawartość zostanie udostępniona {content.premiere_date}
+        </main>
+      )}
       <pre>
         {JSON.stringify(content, null, 2)}
       </pre>
