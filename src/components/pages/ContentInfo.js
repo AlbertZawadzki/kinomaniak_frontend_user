@@ -2,13 +2,15 @@ import React from "react"
 import ContentSection from "./ContentSection"
 
 const ContentInfo = ({ content }) => {
-  const poster = content.images.filter(image => image.type === "poster")[0]
+  const poster = content.images.filter(image => image.type === "poster")[0] || false
 
   return (
     <main className="content-info-wrapper">
-      <div className="content-poster-wrapper">
-        <img className="content-poster" src={poster.image_url} alt={content.title} />
-      </div>
+      {!poster ? null : (
+        <div className="content-poster-wrapper">
+          <img className="content-poster" src={poster?.image_url || ""} alt={content.title} />
+        </div>
+      )}
       <div className="content-data-wrapper">
         <ContentSection title="Opis">
           {content.description}

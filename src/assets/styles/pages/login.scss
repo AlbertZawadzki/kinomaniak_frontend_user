@@ -1,0 +1,68 @@
+.login-page-wrapper {
+  display: flex;
+
+  @include mobileMax {
+    flex-direction: column;
+  }
+}
+
+.login-page-form-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 40px);
+  padding: 20px;
+
+  &:first-of-type {
+    @include themify {
+      border-right: 1px solid themed($colorMain);
+    }
+  }
+}
+
+.login-page-input-wrapper {
+  padding: 0 5px;
+  display: flex;
+  flex-direction: column;
+
+  label {
+    cursor: pointer;
+
+    @include themify {
+      border-bottom: 1px solid themed($colorMain);
+    }
+  }
+
+  input {
+    margin: 4px 4px 2px;
+    border-radius: 3px;
+
+    @include themify {
+      border: 1px solid rgba(themed($colorMain), 0.2);
+      background-color: rgba(themed($colorMain), 0.2);
+    }
+  }
+}
+
+.login-page-submit {
+  text-transform: uppercase;
+  margin: 10px 0 0 auto;
+  padding: 5px 10px;
+  border-radius: 3px;
+  background-color: $colorSuccess;
+  cursor: pointer;
+  color: $colorWhite;
+  border: 0;
+  transition: background-color 0.25s ease-in-out;
+
+  @include themify {
+    box-shadow: 0 0 3px 1px rgba(themed($colorMainContrast), 0.4);
+  }
+
+  &:hover {
+    background-color: $colorBrightBlue;
+
+    @include themify {
+      box-shadow: 0 0 3px 1px rgba(themed($colorMainContrast), 0.7);
+    }
+  }
+}
