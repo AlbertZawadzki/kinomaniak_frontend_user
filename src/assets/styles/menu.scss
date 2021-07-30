@@ -10,7 +10,8 @@ nav {
   z-index: 100;
 
   @include themify {
-    background: themed($colorMain);
+    background: themed($colorMainDarker);
+    box-shadow: 0 0 3px 1px rgba(themed($colorMainContrast), 0.25);
   }
 
   @include mobileMax {
