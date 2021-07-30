@@ -10,6 +10,8 @@ import store from "../../redux/store"
 import Slider from "./Slider"
 import Head from "next/head"
 import Loader from "../Loader"
+import Notifications from "./notifications"
+import Dev from "./dev"
 
 class Layout extends React.Component {
   state = {
@@ -45,12 +47,14 @@ class Layout extends React.Component {
         <Head>
           <title>VOD | {title || ""}</title>
         </Head>
+        <Notifications />
         <DesktopMenu />
         <MobileMenu />
         <Slider slides={slides} />
         <main>
           {children}
         </main>
+        <Dev />
         <footer>
           {
             fitSeo.map(item => (

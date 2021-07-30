@@ -1,23 +1,69 @@
 import React from "react"
 import Layout from "../components/layout/Layout"
+import database from "../database"
+import store from "../redux/store"
 
 class Login extends React.Component {
   state = {
     loginText: "Zaloguj się",
     registerText: "Zarejestruj się",
+    user: undefined,
   }
 
+  componentDidMount() {
+    store.subscribe(() => {
+      this.setState({
+          user: store.getState().request?.data?.user,
+        },
+      )
+    })
+  }
 
-  submitLoginForm = (event) => {
-    console.log(event)
+  submitLoginForm = async (event) => {
+    event.preventDefault()
+    const email = event.target[0]?.value || ""
+    const password = event.target[1]?.value || ""
+
+    const formData = new FormData()
+    formData.append("email", email)
+    formData.append("password", password)
+
+    await database.doLogin(formData)
   }
 
   submitRegisterForm = (event) => {
-    console.log(event)
+    event.preventDefault()
+    const email = event.target[0]?.value || ""
+    const name = event.target[1]?.value || ""
+    const lastname = event.target[2]?.value || ""
+    const password = event.target[3]?.value || ""
+    const passwordRepeat = event.target[4]?.value || ""
+    const sub = event.target[5]?.checked
+    const rules = event.target[6]?.checked
+  }
+
+  logout = async () => {
+    await database.doLogout()
+    this.forceUpdate()
   }
 
   render() {
-    const { loginText, registerText } = this.state
+    const { loginText, registerText, user } = this.state
+
+    if (user) {
+      return (
+        <Layout title={"Logowanie"}>
+          Jesteś już zalogowany
+          <button
+            type="button"
+            className="login-page-submit"
+            onClick={() => this.logout()}
+          >
+            wyloguj się
+          </button>
+        </Layout>
+      )
+    }
 
     return (
       <Layout title={"Logowanie"}>
@@ -30,14 +76,14 @@ class Login extends React.Component {
               <label htmlFor="email">
                 Email:
               </label>
-              <input id="email" type="email" name="email" required />
+              <input autoComplete="off" id="email" type="email" name="email" required />
             </div>
 
             <div className="login-page-input-wrapper">
               <label htmlFor="password">
                 Hasło:
               </label>
-              <input id="password" type="password" name="password" required />
+              <input autoComplete="off" id="password" type="password" name="password" required />
             </div>
 
             <input type="submit" className="login-page-submit" value={loginText} />
@@ -51,35 +97,35 @@ class Login extends React.Component {
               <label htmlFor="email-reg">
                 Email:
               </label>
-              <input id="email-reg" type="email" name="email" required />
+              <input autoComplete="off" id="email-reg" type="email" name="email" required />
             </div>
 
             <div className="login-page-input-wrapper">
               <label htmlFor="name">
                 Imię:
               </label>
-              <input id="name" type="text" name="name" required />
+              <input autoComplete="off" id="name" type="text" name="name" required />
             </div>
 
             <div className="login-page-input-wrapper">
               <label htmlFor="lastname">
                 Nazwisko:
               </label>
-              <input id="lastname" type="text" name="lastname" required />
+              <input autoComplete="off" id="lastname" type="text" name="lastname" required />
             </div>
 
             <div className="login-page-input-wrapper">
               <label htmlFor="password-reg">
                 Hasło:
               </label>
-              <input id="password-reg" type="password" name="password" required />
+              <input autoComplete="off" id="password-reg" type="password" name="password" required />
             </div>
 
             <div className="login-page-input-wrapper">
               <label htmlFor="password_repeat">
                 Powtórz hasło:
               </label>
-              <input id="password_repeat" type="password" name="password_repeat" required />
+              <input autoComplete="off" id="password_repeat" type="password" name="password_repeat" required />
             </div>
 
             <div className="login-page-input-wrapper">

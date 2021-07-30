@@ -1,6 +1,7 @@
-import React from "react"
+import React, { useState } from "react"
 import store from "../../../redux/store"
 import Link from "next/link"
+import { connect } from "react-redux"
 
 const DesktopMenu = () => {
   const pages = store.getState()?.pages?.data || []
@@ -15,6 +16,12 @@ const DesktopMenu = () => {
       document.body.className = "theme-light"
     }
   }
+
+  const [user, setUser] = useState(store.getState().request?.data?.user)
+
+  store.subscribe(() => {
+    setUser(store.getState().request?.data?.user)
+  })
 
   return (
     <nav className="min-tablet">
@@ -50,11 +57,19 @@ const DesktopMenu = () => {
           </div>
         )}
       <div className="menu-item-wrapper">
-        <Link href="/login">
-          <div className="menu-item">
-            Logowanie
-          </div>
-        </Link>
+        {!user ? (
+          <Link href="/login">
+            <div className="menu-item">
+              Logowanie
+            </div>
+          </Link>
+        ) : (
+          <Link href="/profil">
+            <div className="menu-item">
+              {user.name} {user.lastname}
+            </div>
+          </Link>
+        )}
       </div>
       <div className="menu-item-wrapper" onClick={() => changeTheme()}>
         <div className="menu-item">
@@ -65,4 +80,4 @@ const DesktopMenu = () => {
   )
 }
 
-export default DesktopMenu
+export default connect()(DesktopMenu)

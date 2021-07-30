@@ -1,0 +1,81 @@
+.notification-wrapper {
+  position: absolute;
+  top: 60px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  left: 50%;
+  z-index: 10;
+  transform: translateX(-50%);
+}
+
+.notification-inner-wrapper {
+  position: relative;
+  margin: 0 auto;
+}
+
+.notification {
+  background-color: $colorWhite;
+  position: relative;
+  margin: 10px 0;
+  width: 300px;
+
+  &.success {
+    background-color: $colorSuccess;
+  }
+
+  &.failure {
+    background-color: $colorFailure;
+  }
+
+  &.more-action {
+    background-color: $colorMoreAction;
+  }
+
+  &.processing {
+    background-color: $colorProcessing;
+  }
+
+  &.unknown {
+    background-color: $colorBlack;
+    color: $colorRed;
+  }
+
+  &.closing {
+    transition: all 0.25s ease-in-out;
+    padding: 0;
+    height: 0;
+    transform-origin: top center;
+    transform: scale(0);
+    overflow: hidden;
+  }
+
+  @include themify {
+    box-shadow: 0 0 3px 1px rgba(themed($colorMainContrast), $halfOpacity);
+  }
+}
+
+.notification-title {
+  width: calc(100% - 19px);
+  margin: 0;
+  text-align: left;
+  text-indent: 3px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: $colorWhite;
+  text-shadow: 1px 1px 1px rgba($colorWhite, $fullOpacity),
+  -1px 1px 1px rgba($colorWhite, $fullOpacity),
+  1px -1px 1px rgba($colorWhite, $fullOpacity),
+  -1px -1px 1px rgba($colorWhite, $fullOpacity);
+  padding: 5px 5px 0;
+}
+
+.notification-message {
+  margin-top: 4px;
+  text-align: justify;
+  padding: 3px;
+  text-indent: 3px;
+  background-color: rgba($colorWhite, $lightOpacity);
+  color: $colorBlack;
+}

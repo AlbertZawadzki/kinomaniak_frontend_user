@@ -6,6 +6,23 @@ const MobileMenu = () => {
   const pages = store.getState()?.pages?.data || []
   const [show, switchMenu] = useState(false)
 
+  const [user, setUser] = useState(store.getState().request?.data?.user)
+
+  const changeTheme = () => {
+    const actualTheme = localStorage.getItem("theme") || "theme-light"
+    if (actualTheme === "theme-light") {
+      localStorage.setItem("theme", "theme-dark")
+      document.body.className = "theme-dark"
+    } else {
+      localStorage.setItem("theme", "theme-light")
+      document.body.className = "theme-light"
+    }
+  }
+
+  store.subscribe(() => {
+    setUser(store.getState().request?.data?.user)
+  })
+
   return (
     <nav className={`max-mobile ${show ? "show" : "hide"}`}>
       <div className={`menu-lines-wrapper ${show ? "show" : "hide"}`} onClick={() => switchMenu(!show)}>
@@ -44,11 +61,24 @@ const MobileMenu = () => {
         </div>
       )}
       <div className='menu-item-wrapper'>
-        <Link href='/login'>
-          <div className='menu-item'>
-            Logowanie
-          </div>
-        </Link>
+        {!user ? (
+          <Link href="/login">
+            <div className="menu-item">
+              Logowanie
+            </div>
+          </Link>
+        ) : (
+          <Link href="/profil">
+            <div className="menu-item">
+              {user.name} {user.lastname}
+            </div>
+          </Link>
+        )}
+      </div>
+      <div className="menu-item-wrapper" onClick={() => changeTheme()}>
+        <div className="menu-item">
+          Motyw
+        </div>
       </div>
     </nav>
   )
