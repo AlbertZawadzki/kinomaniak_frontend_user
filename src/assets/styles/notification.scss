@@ -15,7 +15,7 @@
 }
 
 .notification {
-  background-color: $colorWhite;
+  background-color: $colorOrange;
   position: relative;
   margin: 10px 0;
   width: 300px;
@@ -78,4 +78,19 @@
   text-indent: 3px;
   background-color: rgba($colorWhite, $lightOpacity);
   color: $colorBlack;
+}
+
+.notification-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  transition: color 0.1s ease-in-out;
+  font-size: 20px;
+
+  &:hover {
+    color: $colorWhite;
+  }
 }

@@ -30,6 +30,13 @@ class Notification extends React.Component {
 
   componentDidMount() {
     let { status } = this.props
+    this.setState({
+      status: {
+        ...this.state.status,
+        button: status,
+        name: status,
+      },
+    })
 
     const { autoClose } = status
     const { step } = this.state
@@ -57,7 +64,7 @@ class Notification extends React.Component {
   render() {
     let { title, message } = this.props
     let { status, counter } = this.state
-    const buttonClass = "notification-button absolute right top " + status.button
+    const buttonClass = "notification-button"
 
     return (
       <div
@@ -68,7 +75,7 @@ class Notification extends React.Component {
         onMouseLeave={() => this.setCountDown(true)}
       >
         <button className={buttonClass} onClick={() => this.close()}>
-          X
+          &#10006;
         </button>
         <h3 className="notification-title no-border">
           {title}

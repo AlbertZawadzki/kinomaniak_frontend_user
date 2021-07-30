@@ -12,6 +12,13 @@ class Section extends React.Component {
     slidesToScroll: 6,
     responsive: [
       {
+        breakpoint: 1144,
+        settings: {
+          slidesToShow: 5,
+          slidesToScroll: 5,
+        },
+      },
+      {
         breakpoint: 1024,
         settings: {
           slidesToShow: 4,
