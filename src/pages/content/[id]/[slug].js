@@ -15,7 +15,6 @@ const Content = ({ content }) => {
     show = 2
   }
 
-
   return (
     <Layout title={content.title}>
       <h1 className="content-title">{content.title}</h1>
@@ -32,9 +31,6 @@ const Content = ({ content }) => {
           Ta zawartość zostanie udostępniona {content.premiere_date}
         </main>
       )}
-      <pre>
-        {JSON.stringify(content, null, 2)}
-      </pre>
     </Layout>
   )
 }

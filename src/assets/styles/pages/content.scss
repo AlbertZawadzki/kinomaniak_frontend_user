@@ -79,3 +79,29 @@
   flex-direction: column;
   font-weight: bold;
 }
+
+.show-movie-button {
+  margin: 20px 0 20px auto;
+  padding: 10px 30px;
+  background-color: $colorGreen;
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
+
+  @include themify {
+    color: themed($colorMainContrast);
+  }
+}
+
+.buy-movie-button {
+  margin: 20px 0 20px auto;
+  padding: 10px 30px;
+  background-color: $colorOrange;
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
+
+  @include themify {
+    color: themed($colorMainContrast);
+  }
+}

@@ -73,3 +73,7 @@ footer {
     color: themed('colorMainContrast');
   }
 }
+
+iframe {
+  aspect-ratio: 16 / 9;
+}
