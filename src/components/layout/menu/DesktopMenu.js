@@ -17,10 +17,15 @@ const DesktopMenu = () => {
     }
   }
 
-  const [user, setUser] = useState(store.getState().request?.data?.user)
+  const [user, setUser] = useState(store.getState().request?.data?.user?.id ? store.getState().request?.data?.user : false)
 
   store.subscribe(() => {
-    setUser(store.getState().request?.data?.user)
+    if (store.getState().request?.data?.user?.id > 0) {
+      setUser(store.getState().request?.data?.user);
+      return;
+    }
+
+    setUser(false)
   })
 
   return (

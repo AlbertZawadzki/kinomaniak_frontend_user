@@ -50,7 +50,7 @@ class Login extends React.Component {
   render() {
     const { loginText, registerText, user } = this.state
 
-    if (user) {
+    if (user && user.id) {
       return (
         <Layout title={"Logowanie"}>
           Jesteś już zalogowany

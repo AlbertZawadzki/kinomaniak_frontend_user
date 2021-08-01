@@ -6,8 +6,6 @@ const MobileMenu = () => {
   const pages = store.getState()?.pages?.data || []
   const [show, switchMenu] = useState(false)
 
-  const [user, setUser] = useState(store.getState().request?.data?.user)
-
   const changeTheme = () => {
     const actualTheme = localStorage.getItem("theme") || "theme-light"
     if (actualTheme === "theme-light") {
@@ -19,8 +17,15 @@ const MobileMenu = () => {
     }
   }
 
+  const [user, setUser] = useState(store.getState().request?.data?.user?.id ? store.getState().request?.data?.user : false)
+
   store.subscribe(() => {
-    setUser(store.getState().request?.data?.user)
+    if (store.getState().request?.data?.user?.id > 0) {
+      setUser(store.getState().request?.data?.user)
+      return;
+    }
+
+    setUser(false)
   })
 
   return (
