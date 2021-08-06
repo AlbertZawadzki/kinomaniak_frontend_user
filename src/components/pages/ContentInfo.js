@@ -1,11 +1,51 @@
 import React, { useState } from "react"
 import ContentSection from "./ContentSection"
+import store from "../../redux/store"
+import database from "../../database"
 
 const ContentInfo = ({ content }) => {
   const poster = content.images.filter(image => image.type === "poster")[0] || false
 
   const [showMovie, switchShowMovie] = useState(false)
   const [showPlans, switchShowPlans] = useState(false)
+  const [buyPanel, setBuyPanel] = useState(<React.Fragment />)
+  const [hasAccess, setHasAccess] = useState(content.has_access)
+
+  console.log(content)
+
+  const buy = async (plan) => {
+    const formData = new FormData()
+    formData.append("planId", plan.id)
+    const res = await database.post("buy-plan", (data) => {
+    }, formData)
+
+    if (res?.ok) {
+      setHasAccess(true)
+    }
+  }
+
+  const [userExists, setUserExists] = useState(!!store.getState().request?.data?.user?.id)
+
+  store.subscribe(() => {
+    setUserExists(!!store.getState().request?.data?.user?.id)
+  })
+
+  const showBuyPanel = (plan) => {
+    const panel = (
+      <div className="buy-panel-wrapper">
+        <h3>{plan.name}</h3>
+        <p>{plan.description}</p>
+        <input
+          className="buy-button"
+          type="button"
+          value="Wykup"
+          onClick={() => buy(plan)}
+        />
+      </div>
+    )
+
+    setBuyPanel(panel)
+  }
 
   return (
     <main className="content-info-wrapper">
@@ -101,47 +141,66 @@ const ContentInfo = ({ content }) => {
             />
           </ContentSection>
         )}
-        {!content.video ? null :
-          content.has_access ? (
-            <React.Fragment>
-              <button className="show-movie-button" onClick={() => switchShowMovie(!showMovie)}>
-                {showMovie ? "Schowaj film" : "Oglądaj"}
-              </button>
-              {!showMovie ? null : (
-                <ContentSection title="Oglądaj">
-                  <iframe
-                    src="https://player.vimeo.com/video/511589405"
-                    width="100%"
-                    height="auto"
-                    frameBorder="0"
-                    allow="autoplay; fullscreen"
-                    allowFullScreen
-                  />
-                </ContentSection>
-              )}
-            </React.Fragment>
-          ) : (
-            <React.Fragment>
-              <button className="buy-movie-button" onClick={() => switchShowPlans(!showPlans)}>
-                {showPlans ? "Schowaj plany" : "Kup"}
-              </button>
-              {!showPlans ? null : (
-                <ContentSection title="Dostępne w planach:">
-                  {
-                    content.plans.length === 0 ? (
-                      <div>
-                        Aktualnie niedostępne
-                      </div>
-                    ) : content.plans.map(plan => (
-                      <React.Fragment>
-                        {plan.key}
-                      </React.Fragment>
-                    ))
-                  }
-                </ContentSection>
-              )}
-            </React.Fragment>
-          )
+        {!userExists ? (
+            <div>
+              Zaloguj się aby oglądać lub kupić ten film
+            </div>
+          ) :
+          !content.video ? null :
+            hasAccess ? (
+              <React.Fragment>
+                <button className="show-movie-button" onClick={() => switchShowMovie(!showMovie)}>
+                  {showMovie ? "Schowaj film" : "Oglądaj"}
+                </button>
+                {!showMovie ? null : (
+                  <ContentSection title="Oglądaj">
+                    <iframe
+                      src="https://player.vimeo.com/video/511589405"
+                      width="100%"
+                      height="auto"
+                      frameBorder="0"
+                      allow="autoplay; fullscreen"
+                      allowFullScreen
+                    />
+                  </ContentSection>
+                )}
+              </React.Fragment>
+            ) : (
+              <React.Fragment>
+                <button className="buy-movie-button" onClick={() => switchShowPlans(!showPlans)}>
+                  {showPlans ? "Schowaj plany" : "Kup"}
+                </button>
+                {!showPlans ? null : (
+                  <React.Fragment>
+                    <ContentSection title="Dostępne w planach:">
+                      {
+                        content.plans.length === 0 ? (
+                          <div className="info-box">
+                            Aktualnie niedostępne
+                          </div>
+                        ) : content.plans.map(plan => (
+                          <div className="plans-wrapper">
+                            <div className="plan-row">
+                              <p>
+                                {plan.auto_renew ? "[SVOD]" : "[TVOD]"} {plan.name} czas trwania: {plan.duration} dni,
+                                dostępny w {plan.currencies.length} walutach. Ilość filmów w tym planie: {plan.contents}
+                              </p>
+                              <input
+                                className="buy-button"
+                                type="button"
+                                value="Przejdź do zakupu"
+                                onClick={() => showBuyPanel(plan)}
+                              />
+                            </div>
+                          </div>
+                        ))
+                      }
+                    </ContentSection>
+                    {buyPanel}
+                  </React.Fragment>
+                )}
+              </React.Fragment>
+            )
         }
       </div>
     </main>
