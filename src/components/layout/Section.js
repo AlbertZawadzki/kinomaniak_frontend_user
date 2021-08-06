@@ -61,7 +61,7 @@ class Section extends React.Component {
         <div className="posters-wrapper">
           <SliderSlick {...this.settings}>
             {
-              contents?.map((content, posterNo) => (
+              contents?.filter(content => !content.geo_blocked).map((content, posterNo) => (
                   <Link href={`/content/${content.url}`} key={`${key}-${content.key}-${posterNo}`}>
                     <Poster {...content} contentUrl={`/content/${content.id}/${content.url}`} />
                   </Link>
