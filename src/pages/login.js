@@ -31,7 +31,7 @@ class Login extends React.Component {
     await database.doLogin(formData)
   }
 
-  submitRegisterForm = (event) => {
+  submitRegisterForm = async (event) => {
     event.preventDefault()
     const email = event.target[0]?.value || ""
     const name = event.target[1]?.value || ""
@@ -40,6 +40,19 @@ class Login extends React.Component {
     const passwordRepeat = event.target[4]?.value || ""
     const sub = event.target[5]?.checked
     const rules = event.target[6]?.checked
+
+    const formData = new FormData()
+    formData.append("email", email)
+    formData.append("name", name)
+    formData.append("lastname", lastname)
+    formData.append("password", password)
+    formData.append("passwordRepeat", passwordRepeat)
+    formData.append("sub", sub)
+    formData.append("rules", rules)
+
+    const res = await database.post("register", console.log, formData)
+
+    console.log(res)
   }
 
   logout = async () => {
@@ -53,14 +66,18 @@ class Login extends React.Component {
     if (user && user.id) {
       return (
         <Layout title={"Logowanie"}>
-          Jesteś już zalogowany
-          <button
-            type="button"
-            className="login-page-submit"
-            onClick={() => this.logout()}
-          >
-            wyloguj się
-          </button>
+          <div className="error-box">
+            <div style={{ margin: "auto" }}>
+              <span style={{ marginRight: "15px" }}>Jesteś już zalogowany</span>
+              <button
+                type="button"
+                className="login-page-submit"
+                onClick={() => this.logout()}
+              >
+                wyloguj się
+              </button>
+            </div>
+          </div>
         </Layout>
       )
     }

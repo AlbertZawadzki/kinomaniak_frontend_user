@@ -9,7 +9,6 @@ import {
   setUser,
   unblockRequests,
 } from "../redux/actions/request"
-import database from "./index"
 
 class Configuration {
   USER_TOKEN_REFRESH_TIME = 60 * 1000
@@ -115,7 +114,7 @@ class Configuration {
           store.dispatch(action)
         }
         if (!silent) {
-          store.dispatch(addNotification({ status: "success", title: "Item created" }))
+          store.dispatch(addNotification({ status: "success", title: "OK" }))
         }
         return true
       case 204:
@@ -128,7 +127,11 @@ class Configuration {
         return realData || []
       case 400:
         if (!silent) {
-          store.dispatch(addNotification({ status: "failure", message: JSON.stringify(data.data, null, 2) }))
+          store.dispatch(addNotification({
+            title: "Niepoprawne dane",
+            status: "failure",
+            message: data?.data?.message || "Spróbuj jeszcze raz",
+          }))
         }
         return false
       case 403:

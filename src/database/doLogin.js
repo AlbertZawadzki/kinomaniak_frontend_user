@@ -15,8 +15,9 @@ const doLogin = async (form) => {
       console.error(error)
 
       store.dispatch(addNotification({
+        title: "Błąd danych",
         status: "failure",
-        message: JSON.stringify(error.message, null, 2),
+        message: "Niepoprawne dane",
       }))
 
       return false

@@ -29,28 +29,33 @@ class Profil extends React.Component {
     if (!user) {
       return (
         <Layout title={"Logowanie"}>
-          Jesteś niezalogowany
-          <Link
-            href="/login"
-          >
-            zaloguj się
-          </Link>
+          <div className="error-box">
+            <p style={{ margin: "auto" }}>
+              <span style={{ marginRight: "5px" }}>Jesteś niezalogowany</span>
+              <Link
+                href="/login"
+              >
+                zaloguj się
+              </Link>
+            </p>
+          </div>
         </Layout>
       )
     }
 
     return (
       <Layout title={"Profil " + user.name + " " + user.lastname}>
-        <pre>
-        {JSON.stringify(user, null, 2)}
-        </pre>
-        <button
-          type="button"
-          className="login-page-submit"
-          onClick={() => this.logout()}
-        >
-          Wyloguj się
-        </button>
+        <div className="profile-data-wrapper">
+          <button
+            type="button"
+            className="login-page-submit"
+            onClick={() => this.logout()}
+          >
+            Wyloguj się
+          </button>
+          <p><span>Imię:</span> {user.name}</p>
+          <p><span>Nazwisko:</span>{user.lastname}</p>
+        </div>
       </Layout>
     )
   }
