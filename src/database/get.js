@@ -2,7 +2,7 @@ import databaseConfig from "./config"
 import store from "../redux/store"
 import { addNotification } from "../redux/actions/notification"
 
-const get = async (url, silent = false) => {
+const get = async (url, silent = true) => {
   const axios = databaseConfig.getAxios()
 
   if (!databaseConfig.canMakeRequest()) {

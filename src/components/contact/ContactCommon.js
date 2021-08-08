@@ -1,14 +1,24 @@
 import React from "react"
-import { sendMessage } from "../../database/sendMessage"
+import database from "../../database"
 
 const ContactCommon = () => {
 
-  const send = (event) => {
+  const send = async (event) => {
     event.preventDefault()
     const email = event.target[0].value
     const title = event.target[1].value
     const message = event.target[2].value
-    sendMessage(email, title, message)
+
+    const formData = new FormData()
+    formData.append("email", email)
+    formData.append("title", title)
+    formData.append("message", message)
+
+    await database.post("mail", (data) => {
+      setTimeout(() => {
+        window.location.replace("/")
+      }, 250)
+    }, formData)
   }
 
   return (

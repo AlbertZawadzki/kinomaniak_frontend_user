@@ -50,9 +50,8 @@ class Login extends React.Component {
     formData.append("sub", sub)
     formData.append("rules", rules)
 
-    const res = await database.post("register", console.log, formData)
-
-    console.log(res)
+    await database.post("register", (data) => {
+    }, formData)
   }
 
   logout = async () => {
