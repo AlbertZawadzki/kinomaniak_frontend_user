@@ -10,10 +10,10 @@ const remove = async (url, action) => {
   }
 
   if (!databaseConfig.canMakeRequest()) {
-    store.dispatch(addNotification({
-      status: "unknown",
-      message: `Timeouting`,
-    }))
+    // store.dispatch(addNotification({
+    //   status: "unknown",
+    //   message: `Timeouting`,
+    // }))
     setTimeout(() => remove(url, action), 1000)
     return
   }

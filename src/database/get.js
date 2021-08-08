@@ -6,10 +6,10 @@ const get = async (url, silent = true) => {
   const axios = databaseConfig.getAxios()
 
   if (!databaseConfig.canMakeRequest()) {
-    store.dispatch(addNotification({
-      status: "unknown",
-      message: `Timeouting`,
-    }))
+    // store.dispatch(addNotification({
+    //   status: "unknown",
+    //   message: `Timeouting`,
+    // }))
     setTimeout(() => get(url, silent), 1000)
     return
   }

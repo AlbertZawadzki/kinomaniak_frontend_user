@@ -106,7 +106,7 @@ class Configuration {
           store.dispatch(action)
         }
         if (!silent) {
-          store.dispatch(addNotification({ status: "success", message: `url: ${object.config.url}` }))
+          store.dispatch(addNotification({ status: "success", title: "OK" }))
         }
         return realData || []
       case 201:
@@ -122,7 +122,7 @@ class Configuration {
           store.dispatch(action)
         }
         if (!silent) {
-          store.dispatch(addNotification({ status: "success", title: "No items found" }))
+          store.dispatch(addNotification({ status: "success", title: "OK" }))
         }
         return realData || []
       case 400:
