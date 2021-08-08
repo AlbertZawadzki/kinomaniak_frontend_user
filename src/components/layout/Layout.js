@@ -54,7 +54,7 @@ class Layout extends React.Component {
         <main>
           {children}
         </main>
-        <Dev />
+        {/*<Dev />*/}
         <footer>
           {
             fitSeo.map(item => (
