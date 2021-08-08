@@ -1,0 +1,19 @@
+.single-season-wrapper,
+.single-episode-wrapper {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 20px;
+  margin: 3px 0;
+  border-radius: 3px;
+  cursor: pointer;
+  @include themify {
+    color: themed($colorMain);
+    border: 1px solid rgba(themed($colorMainContrast), 0.25);
+  }
+
+  &:hover {
+    @include themify {
+      background-color: rgba(themed($colorMainContrastDarker), 0.5);
+    }
+  }
+}

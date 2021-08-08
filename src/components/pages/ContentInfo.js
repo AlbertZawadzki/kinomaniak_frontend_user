@@ -11,8 +11,6 @@ const ContentInfo = ({ content }) => {
   const [buyPanel, setBuyPanel] = useState(<React.Fragment />)
   const [hasAccess, setHasAccess] = useState(content.has_access)
 
-  console.log(content)
-
   const buy = async (plan) => {
     const formData = new FormData()
     formData.append("planId", plan.id)
@@ -201,6 +199,35 @@ const ContentInfo = ({ content }) => {
                 )}
               </React.Fragment>
             )
+        }
+        {
+          content?.seasons?.length > 0 ? (
+            <ContentSection title={`Sezony (${content.seasons.length}):`}>
+              {content.seasons.map(season =>
+                (
+                  <a href={`/content/${season.id}/${season.url}`}>
+                    <div className="single-season-wrapper">
+                      {season.title}
+                    </div>
+                  </a>
+                ),
+              )}
+            </ContentSection>
+          ) : null
+        }
+        {
+          content?.episodes?.length > 0 ? (
+            <ContentSection title={`Odcinki (${content.episodes.length}):`}>
+              {content.episodes.map(episode => (
+                  <a href={`/content/${episode.id}/${episode.url}`}>
+                    <div className="single-episode-wrapper">
+                      {episode.title}
+                    </div>
+                  </a>
+                ),
+              )}
+            </ContentSection>
+          ) : null
         }
       </div>
     </main>
