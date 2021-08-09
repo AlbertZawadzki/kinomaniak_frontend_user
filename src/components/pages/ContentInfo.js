@@ -2,9 +2,18 @@ import React, { useState } from "react"
 import ContentSection from "./ContentSection"
 import store from "../../redux/store"
 import database from "../../database"
+import SliderSlick from "react-slick"
 
 const ContentInfo = ({ content }) => {
   const poster = content.images.filter(image => image.type === "poster")[0] || false
+
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  }
 
   const [showMovie, switchShowMovie] = useState(false)
   const [showPlans, switchShowPlans] = useState(false)
@@ -116,14 +125,18 @@ const ContentInfo = ({ content }) => {
             </div>
           </ContentSection>
         )}
-        {content.gallery.length === 0 ? null : (
+        {content.gallery.filter(image => image.type === "other").length === 0 ? null : (
           <ContentSection title="Zdjęcia">
             <div className="images-wrapper">
-              {content.gallery?.map(image => {
-                if (image.type === "other") {
-                  <img src={image.image_url} alt={content.title} />
+              <SliderSlick {...settings}>
+                {
+                  content.gallery?.map(image => (
+                    <div className="gallery-image-wrapper">
+                      <img src={image.image_url} alt={content.title} />
+                    </div>
+                  ))
                 }
-              })}
+              </SliderSlick>
             </div>
           </ContentSection>
         )}
